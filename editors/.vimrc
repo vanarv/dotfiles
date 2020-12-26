@@ -35,6 +35,7 @@ filetype plugin indent on    " required
 colorscheme gruvbox
 set bg=dark
 syntax on
+set number
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
