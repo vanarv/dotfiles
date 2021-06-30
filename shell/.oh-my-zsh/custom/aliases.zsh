@@ -8,5 +8,3 @@ alias reload.term="source ~/.bash_profile && source ~/.zshrc"
 alias ll="ls -AlhG"
 
 
-# tmux
-alias tmux="xterm-256color tmux"
