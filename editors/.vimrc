@@ -19,6 +19,7 @@
     Plugin 'https://github.com/tpope/vim-fugitive' "So awesome, it should be illegal 
     Plugin 'flazz/vim-colorschemes' "Vim colorschemes"
     Plugin 'rafi/awesome-vim-colorschemes' "Vim colorschemes"
+    Plugin 'faith/vim-go'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Vundles, please ignore key map error messages"

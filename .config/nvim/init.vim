@@ -1,43 +1,24 @@
 " >> load plugins
-call plug#begin(stdpath('data') . 'vimplug')
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'kabouzeid/nvim-lspinstall'
-    Plug 'glepnir/lspsaga.nvim'
-    Plug 'hrsh7th/nvim-compe'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+runtime ./plug.vim
+if has("unix")
+     let s:uname = system("uname -s")
+     " Load Mac specific things
+     if s:uname == "Darwin\n"
+         runtime ./macos.vim
+     endif 
+endif
 
-    Plug 'glepnir/galaxyline.nvim', { 'branch': 'main' }
-    Plug 'kyazdani42/nvim-web-devicons'  " needed for galaxyline icons
-
-    Plug 'NLKNguyen/papercolor-theme'
-    Plug 'nikvdp/neomux'
-
-    Plug 'tpope/vim-ragtag'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-unimpaired'
-
-    Plug 'tpope/vim-eunuch'
-    Plug 'tpope/vim-fugitive'
-
-    Plug 'tomtom/tcomment_vim'
-call plug#end()
-
-
-
-colorscheme PaperColor
+colorscheme palenight
 
 " basic settings
 syntax on
 set number
+set title
 set relativenumber
 set ignorecase      " ignore case
-set smartcase     " but don't ignore it, when search string contains uppercase letters
+set smartcase       " but don't ignore it, when search string contains uppercase letters
 set nocompatible
-set incsearch        " do incremental searching
+set incsearch       " do incremental searching
 set visualbell
 set expandtab
 set tabstop=4
@@ -50,67 +31,34 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set autoindent
 set mouse=a  " mouse support
 set termguicolors
+set shell=zsh
+set lazyredraw
+set smarttab
 
+filetype plugin indent on
+filetype plugin on
+set path+=**
 
-" set leader key to space
-nnoremap <SPACE> <Nop>
-let g:mapleader=" "
+" Add asterisks when commenting blocks
+set formatoptions+=r
 
-" >> Telescope bindings
-nnoremap <Leader>pp :lua require'telescope.builtin'.builtin{}<CR>
+" Highlights "{{{
+"
+set cursorline
+" set cursorcolumn
 
-" most recentuly used files
-nnoremap <Leader>m :lua require'telescope.builtin'.oldfiles{}<CR>
-
-" find buffer
-nnoremap ; :lua require'telescope.builtin'.buffers{}<CR>
-
-" find in current buffer
-nnoremap <Leader>/ :lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
-
-" bookmarks
-nnoremap <Leader>' :lua require'telescope.builtin'.marks{}<CR>
-
-" git files
-nnoremap <Leader>f :lua require'telescope.builtin'.git_files{}<CR>
-
-" all files
-nnoremap <Leader>bfs :lua require'telescope.builtin'.find_files{}<CR>
-
-" ripgrep like grep through dir
-nnoremap <Leader>rg :lua require'telescope.builtin'.live_grep{}<CR>
-
-" pick color scheme
-nnoremap <Leader>cs :lua require'telescope.builtin'.colorscheme{}<CR>
-
-
-" >> setup nerdcomment key bindings
-let g:NERDCreateDefaultMappings = 0
-let g:NERDSpaceDelims = 1
-
-xnoremap <Leader>ci :call NERDComment('n', 'toggle')<CR>
-nnoremap <Leader>ci :call NERDComment('n', 'toggle')<CR>
-
-
-" >> Lsp key bindings
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K     <cmd>Lspsaga hover_doc<CR>
-nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<CR>
-nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <silent> gn    <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> ga    <cmd>Lspsaga code_action<CR>
-xnoremap <silent> ga    <cmd>Lspsaga range_code_action<CR>
-nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
+runtime ./maps.vim
+" runtime ./airline.vim
 
 lua <<EOF
 require("lsp")
+require("lsp_conf.python-lsp")
 require("treesitter")
 require("statusbar")
 require("completion")
+require("git_signs")
+require("bufferline_conf")
 EOF
+
+autocmd BufWritePost *.go silent execute "!goimports-reviser -local lab.co.clearstreet.io/clearstreet/fleet -file-path <afile>" | edit
+autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
