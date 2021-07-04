@@ -16,9 +16,11 @@ endif
     Plug 'glepnir/galaxyline.nvim', { 'branch': 'main' }
     Plug 'kyazdani42/nvim-web-devicons'  " needed for galaxyline icons
     Plug 'akinsho/nvim-bufferline.lua'
+    Plug 'kyazdani42/nvim-tree.lua', { 'branch': 'main' }
 
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'rafi/awesome-vim-colorschemes'
+    Plug 'drewtempelmeyer/palenight.vim'
     Plug 'nikvdp/neomux'
 
     Plug 'tpope/vim-ragtag'

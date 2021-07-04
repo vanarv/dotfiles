@@ -34,6 +34,7 @@ set termguicolors
 set shell=zsh
 set lazyredraw
 set smarttab
+set background=dark
 
 filetype plugin indent on
 filetype plugin on
@@ -48,6 +49,7 @@ set cursorline
 " set cursorcolumn
 
 runtime ./maps.vim
+runtime ./tree.vim
 " runtime ./airline.vim
 
 lua <<EOF
