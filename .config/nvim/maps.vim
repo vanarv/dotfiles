@@ -3,31 +3,24 @@ nnoremap <SPACE> <Nop>
 let g:mapleader=" "
 
 " >> Telescope bindings
-nnoremap <Leader>pp :lua require'telescope.builtin'.builtin{}<CR>
 
-" most recentuly used files
-nnoremap <Leader>m :lua require'telescope.builtin'.oldfiles{}<CR>
-
-" find buffer
-nnoremap ; :lua require'telescope.builtin'.buffers{}<CR>
-
+ " Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fl <cmd>Telescope git_files<cr>
+" most recently used files
+nnoremap <Leader>fm :lua require'telescope.builtin'.oldfiles{}<CR>
 " find in current buffer
-nnoremap <Leader>/ :lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
-
+nnoremap <Leader>f/ :lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
 " bookmarks
-nnoremap <Leader>' :lua require'telescope.builtin'.marks{}<CR>
+nnoremap <Leader>f' :lua require'telescope.builtin'.marks{}<CR>
 
-" git files
-nnoremap <Leader>f :lua require'telescope.builtin'.git_files{}<CR>
+nnoremap <Leader>pp :lua require'telescope.builtin'.builtin{}<CR>
 
 " Nvim tree toggle
 nnoremap <Leader>t :NvimTreeToggle<CR>
-
-" all files
-nnoremap <Leader>bfs :lua require'telescope.builtin'.find_files{}<CR>
-
-" ripgrep like grep through dir
-nnoremap <Leader>rg :lua require'telescope.builtin'.live_grep{}<CR>
 
 " pick color scheme
 nnoremap <Leader>cs :lua require'telescope.builtin'.colorscheme{}<CR>
@@ -103,3 +96,9 @@ nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
+" >> Hop bindings
+
+ " Find files using Telescope command-line sugar.
+nnoremap <leader>jw <cmd>lua require'hop'.hint_words()<cr>
+nnoremap <leader>jl <cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>
+nnoremap <leader>jp <cmd>lua require'hop'.hint_patterns()<cr>

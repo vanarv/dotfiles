@@ -5,7 +5,10 @@ endif
  call plug#begin()
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'mfussenegger/nvim-dap-python'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-dap.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'kabouzeid/nvim-lspinstall'
     Plug 'glepnir/lspsaga.nvim'
@@ -16,7 +19,7 @@ endif
     Plug 'glepnir/galaxyline.nvim', { 'branch': 'main' }
     Plug 'kyazdani42/nvim-web-devicons'  " needed for galaxyline icons
     Plug 'akinsho/nvim-bufferline.lua'
-    Plug 'kyazdani42/nvim-tree.lua', { 'branch': 'main' }
+    Plug 'kyazdani42/nvim-tree.lua', { 'branch': 'master' }
 
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'rafi/awesome-vim-colorschemes'
@@ -42,7 +45,10 @@ endif
     Plug 'kristijanhusak/defx-icons'
     Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
-    Plug 'preservim/nerdcommenter'
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+    Plug 'phaazon/hop.nvim'
+
 call plug#end()
  
 

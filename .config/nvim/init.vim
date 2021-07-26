@@ -54,13 +54,20 @@ runtime ./tree.vim
 
 lua <<EOF
 require("lsp")
+require("dbg")
 require("lsp_conf.python-lsp")
 require("treesitter")
 require("statusbar")
 require("completion")
 require("git_signs")
 require("bufferline_conf")
+require("tscope")
+require("dap_conf")
+require("hop_conf")
 EOF
 
 autocmd BufWritePost *.go silent execute "!goimports-reviser -local lab.co.clearstreet.io/clearstreet/fleet -file-path <afile>" | edit
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
+
+" Enter automatically into the files directory
+" autocmd BufEnter * silent! lcd %:p:h
