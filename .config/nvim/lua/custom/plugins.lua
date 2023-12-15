@@ -12,6 +12,11 @@ local plugins = {
 	require("custom.plugins.nui"),
 	require("custom.plugins.nvim-notify"),
 	require("custom.plugins.noice"),
+	-- rust plugins
+	require("custom.plugins.nvim-cmp"),
+	require("custom.plugins.rust"),
+	require("custom.plugins.rust-crates"),
+	require("custom.plugins.rust-tools"),
 }
 
 return plugins
